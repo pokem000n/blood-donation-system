@@ -23,7 +23,7 @@ if (url) {
   pool = mysql.createPool({
    host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',
         user: '4FReYFYM9DvA243.root',
-        password: process.env.DB_PASSWORD,
+        password: zhHNJfBg95uovPYC,
         database: 'blood_donation_db',
         port: 4000,
         waitForConnections: true,
