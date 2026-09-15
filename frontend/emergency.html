@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Requests — Blood Donation System</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><div class="logo-icon">🩸</div><h2>Blood Donation<br>Management</h2></div>
+  <nav>
+    <div class="nav-section">Main</div>
+    <a href="index.html"        class="nav-link"><span class="icon">🏠</span> Dashboard</a>
+    <div class="nav-section">Manage</div>
+    <a href="donors.html"       class="nav-link"><span class="icon">👤</span> Donors</a>
+    <a href="recipients.html"   class="nav-link"><span class="icon">🏥</span> Recipients</a>
+    <a href="donations.html"    class="nav-link"><span class="icon">💉</span> Donations</a>
+    <a href="inventory.html"    class="nav-link"><span class="icon">🩸</span> Blood Inventory</a>
+    <div class="nav-section">Requests</div>
+    <a href="requests.html"     class="nav-link"><span class="icon">📋</span> Blood Requests</a>
+    <a href="emergency.html"    class="nav-link"><span class="icon">🚨</span> Emergency</a>
+    <a href="appointments.html" class="nav-link"><span class="icon">📅</span> Appointments</a>
+  </nav>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <h1>🚨 Emergency Requests</h1>
+    <div class="topbar-right">
+      <button class="btn btn-primary" onclick="openModal('modal-add-emergency')">+ File Emergency</button>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="card">
+      <div class="card-header">
+        <h2>All Emergency Requests</h2>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span style="font-size:12px;background:#fff0ef;color:#c0392b;padding:4px 10px;border-radius:6px;font-weight:700;">
+            🔴 Critical rows are highlighted
+          </span>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th><th>Recipient</th><th>Age</th><th>Blood Group</th>
+                <th>Hospital</th><th>Date</th><th>Status</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="emergency-tbody">
+              <tr><td colspan="8" class="loader"><div class="spinner"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Emergency Modal -->
+<div class="modal-backdrop" id="modal-add-emergency">
+  <div class="modal">
+    <div class="modal-header" style="background:#e74c3c;">
+      <h3>🚨 File Emergency Request</h3>
+      <button class="modal-close" onclick="closeModal('modal-add-emergency')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="form-add-emergency" onsubmit="addEmergency(event)">
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Recipient *</label>
+            <select class="form-control" name="recipient_id" id="e-rec-select" required>
+              <option value="">Loading...</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Blood Group *</label>
+            <select class="form-control" name="blood_group_id" id="e-bg-select" required>
+              <option value="">Loading...</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Hospital *</label>
+            <select class="form-control" name="hospital_id" id="e-hosp-select" required>
+              <option value="">Loading...</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Request Date *</label>
+            <input type="date" class="form-control" name="request_date" required/>
+          </div>
+          <div class="form-row" style="grid-column:span 2;">
+            <label>Status *</label>
+            <select class="form-control" name="status" required>
+              <option value="Pending">Pending</option>
+              <option value="Critical">Critical</option>
+              <option value="Fulfilled">Fulfilled</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer" style="padding:0;border:none;margin-top:16px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modal-add-emergency')">Cancel</button>
+          <button type="submit" class="btn btn-danger">File Emergency</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="js/api.js"></script>
+<script src="js/emergency.js"></script>
+</body>
+</html>
