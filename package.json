@@ -2,10 +2,11 @@
   "name": "blood-donation-system",
   "version": "1.0.0",
   "description": "Blood Donation Management System — Full Stack",
-  "main": "backend/server.js",
+  "main": "api/index.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev":   "nodemon backend/server.js"
+    "dev":   "nodemon backend/server.js",
+    "vercel-build": "echo Build complete"
   },
   "dependencies": {
     "cors":    "^2.8.5",
