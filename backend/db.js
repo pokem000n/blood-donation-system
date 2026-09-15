@@ -21,14 +21,18 @@ if (url) {
   });
 } else {
   pool = mysql.createPool({
-    host:     process.env.DB_HOST     || 'localhost',
-    user:     process.env.DB_USER     || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME     || 'blood_donation_db',
-    port:     Number(process.env.DB_PORT) || 3306,
-    waitForConnections: true,
-    connectionLimit:    5,
-    queueLimit:         0
+   host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',
+        user: '4FReYFYM9DvA243.root',
+        password: process.env.DB_PASSWORD,
+        database: 'blood_donation_db',
+        port: 4000,
+        waitForConnections: true,
+        connectionLimit: 5,
+        queueLimit: 0,
+        ssl: {
+            minVersion: 'TLSv1.2',
+            rejectUnauthorized: true
+        }
   });
 }
 
