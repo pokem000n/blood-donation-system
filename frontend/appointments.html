@@ -8,11 +8,14 @@
 </head>
 <body>
 <aside class="sidebar">
-  <div class="sidebar-logo"><div class="logo-icon">🩸</div><h2>Blood Donation<br>Management</h2></div>
+  <div class="sidebar-logo">
+    <div class="logo-icon">🩸</div>
+    <div><h2>BloodBank</h2><span>Management System</span></div>
+  </div>
   <nav>
-    <div class="nav-section">Main</div>
+    <div class="nav-section">Overview</div>
     <a href="index.html"        class="nav-link"><span class="icon">🏠</span> Dashboard</a>
-    <div class="nav-section">Manage</div>
+    <div class="nav-section">Management</div>
     <a href="donors.html"       class="nav-link"><span class="icon">👤</span> Donors</a>
     <a href="recipients.html"   class="nav-link"><span class="icon">🏥</span> Recipients</a>
     <a href="donations.html"    class="nav-link"><span class="icon">💉</span> Donations</a>
@@ -22,38 +25,41 @@
     <a href="emergency.html"    class="nav-link"><span class="icon">🚨</span> Emergency</a>
     <a href="appointments.html" class="nav-link"><span class="icon">📅</span> Appointments</a>
   </nav>
+  <div class="sidebar-footer">Blood Donation DBMS Lab © 2026</div>
 </aside>
 
 <div class="main">
   <div class="topbar">
-    <h1>📅 Appointments</h1>
+    <div class="topbar-title">
+      <div class="page-icon">📅</div>
+      <h1>Appointments</h1>
+    </div>
     <div class="topbar-right">
+      <select id="filter-status" class="filter-select" onchange="filterTable()">
+        <option value="">All Statuses</option>
+        <option>Scheduled</option><option>Completed</option><option>Cancelled</option>
+      </select>
       <button class="btn btn-primary" onclick="openModal('modal-add-appt')">+ Schedule Appointment</button>
     </div>
   </div>
+
   <div class="page-content">
     <div class="card">
       <div class="card-header">
         <h2>All Appointments</h2>
-        <select id="filter-status" class="form-control" style="width:170px;" onchange="filterTable()">
-          <option value="">All Statuses</option>
-          <option>Scheduled</option><option>Completed</option><option>Cancelled</option>
-        </select>
       </div>
-      <div class="card-body" style="padding:0;">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th><th>Donor</th><th>Donation Center</th>
-                <th>Location</th><th>Date</th><th>Status</th><th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="appt-tbody">
-              <tr><td colspan="7" class="loader"><div class="spinner"></div></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Donor</th><th>Donation Center</th>
+              <th>Location</th><th>Date</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="appt-tbody">
+            <tr><td colspan="7"><div class="loader"><div class="spinner"></div></div></td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -94,11 +100,11 @@
             </select>
           </div>
         </div>
-        <div class="modal-footer" style="padding:0;border:none;margin-top:16px;">
-          <button type="button" class="btn btn-outline" onclick="closeModal('modal-add-appt')">Cancel</button>
-          <button type="submit" class="btn btn-primary">Schedule</button>
-        </div>
       </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-appt')">Cancel</button>
+      <button class="btn btn-primary" onclick="document.getElementById('form-add-appt').requestSubmit()">Schedule</button>
     </div>
   </div>
 </div>

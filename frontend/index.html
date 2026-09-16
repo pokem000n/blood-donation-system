@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard — Blood Donation System</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-<!-- ── Sidebar ─────────────────────────────────────────────── -->
 <aside class="sidebar">
   <div class="sidebar-logo">
     <div class="logo-icon">🩸</div>
-    <h2>Blood Donation<br>Management</h2>
+    <div><h2>BloodBank</h2><span>Management System</span></div>
   </div>
   <nav>
-    <div class="nav-section">Main</div>
+    <div class="nav-section">Overview</div>
     <a href="index.html"        class="nav-link"><span class="icon">🏠</span> Dashboard</a>
-    <div class="nav-section">Manage</div>
+    <div class="nav-section">Management</div>
     <a href="donors.html"       class="nav-link"><span class="icon">👤</span> Donors</a>
     <a href="recipients.html"   class="nav-link"><span class="icon">🏥</span> Recipients</a>
     <a href="donations.html"    class="nav-link"><span class="icon">💉</span> Donations</a>
@@ -27,62 +26,79 @@
     <a href="emergency.html"    class="nav-link"><span class="icon">🚨</span> Emergency</a>
     <a href="appointments.html" class="nav-link"><span class="icon">📅</span> Appointments</a>
   </nav>
+  <div class="sidebar-footer">Blood Donation DBMS Lab © 2026</div>
 </aside>
 
-<!-- ── Main ───────────────────────────────────────────────── -->
 <div class="main">
   <div class="topbar">
-    <h1>Dashboard</h1>
+    <div class="topbar-title">
+      <div class="page-icon">🏠</div>
+      <h1>Dashboard</h1>
+    </div>
     <div class="topbar-right">
-      <span id="current-date" style="font-size:13px;color:#7f8c8d;"></span>
+      <div class="topbar-date" id="current-date"></div>
     </div>
   </div>
 
   <div class="page-content">
-
     <!-- Stat Cards -->
-    <div class="stats-grid" id="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon red">👤</div>
+    <div class="stats-grid">
+      <div class="stat-card red">
+        <div class="stat-top">
+          <div class="stat-icon red">👤</div>
+        </div>
         <div class="stat-info"><h3 id="s-donors">—</h3><p>Total Donors</p></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon green">✅</div>
+      <div class="stat-card green">
+        <div class="stat-top">
+          <div class="stat-icon green">✅</div>
+        </div>
         <div class="stat-info"><h3 id="s-available">—</h3><p>Available Donors</p></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon blue">🏥</div>
+      <div class="stat-card blue">
+        <div class="stat-top">
+          <div class="stat-icon blue">🏥</div>
+        </div>
         <div class="stat-info"><h3 id="s-recipients">—</h3><p>Total Recipients</p></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon red">💉</div>
+      <div class="stat-card purple">
+        <div class="stat-top">
+          <div class="stat-icon purple">💉</div>
+        </div>
         <div class="stat-info"><h3 id="s-donations">—</h3><p>Total Donations</p></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon orange">📋</div>
+      <div class="stat-card orange">
+        <div class="stat-top">
+          <div class="stat-icon orange">📋</div>
+        </div>
         <div class="stat-info"><h3 id="s-pending">—</h3><p>Pending Requests</p></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon red">🚨</div>
+      <div class="stat-card red">
+        <div class="stat-top">
+          <div class="stat-icon red">🚨</div>
+        </div>
         <div class="stat-info"><h3 id="s-critical">—</h3><p>Critical Emergencies</p></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon blue">🩸</div>
+      <div class="stat-card blue">
+        <div class="stat-top">
+          <div class="stat-icon blue">🩸</div>
+        </div>
         <div class="stat-info"><h3 id="s-inventory">—</h3><p>Total Stock (ml)</p></div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon green">📅</div>
+      <div class="stat-card green">
+        <div class="stat-top">
+          <div class="stat-icon green">📅</div>
+        </div>
         <div class="stat-info"><h3 id="s-appointments">—</h3><p>Scheduled Appts.</p></div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-
-      <!-- Blood Inventory Chart -->
+    <div class="grid-2">
+      <!-- Inventory Chart -->
       <div class="card">
         <div class="card-header">
-          <h2>🩸 Blood Inventory by Group</h2>
-          <a href="inventory.html" class="btn btn-outline btn-sm">View All</a>
+          <h2>🩸 Blood Stock by Group</h2>
+          <a href="inventory.html" class="btn btn-outline btn-sm">View All →</a>
         </div>
         <div class="card-body">
           <div class="chart-bar-wrap" id="inventory-chart">
@@ -91,31 +107,23 @@
         </div>
       </div>
 
-      <!-- Recent Emergency Requests -->
+      <!-- Emergency Table -->
       <div class="card">
         <div class="card-header">
-          <h2>🚨 Recent Emergency Requests</h2>
-          <a href="emergency.html" class="btn btn-outline btn-sm">View All</a>
+          <h2>🚨 Recent Emergencies</h2>
+          <a href="emergency.html" class="btn btn-outline btn-sm">View All →</a>
         </div>
-        <div class="card-body" style="padding:0;">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Recipient</th>
-                  <th>Blood</th>
-                  <th>Hospital</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="emergency-tbody">
-                <tr><td colspan="4" class="loader"><div class="spinner"></div></td></tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Recipient</th><th>Blood</th><th>Hospital</th><th>Status</th></tr>
+            </thead>
+            <tbody id="emergency-tbody">
+              <tr><td colspan="4"><div class="loader"><div class="spinner"></div></div></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
-
     </div>
   </div>
 </div>

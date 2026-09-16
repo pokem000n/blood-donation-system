@@ -1,51 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang=en>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset=UTF-8 />
+  <meta name=viewport content=width=device-width, initial-scale=1.0/>
   <title>Donors — Blood Donation System</title>
-  <link rel="stylesheet" href="css/style.css"/>
+  <link rel=stylesheet href=css/style.css/>
 </head>
 <body>
 
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-icon">🩸</div>
-    <h2>Blood Donation<br>Management</h2>
+<aside class=sidebar>
+  <div class=sidebar-logo>
+    <div class=logo-icon>🩸</div>
+    <div><h2>BloodBank</h2><span>Management System</span></div>
   </div>
   <nav>
-    <div class="nav-section">Main</div>
-    <a href="index.html"        class="nav-link"><span class="icon">🏠</span> Dashboard</a>
-    <div class="nav-section">Manage</div>
-    <a href="donors.html"       class="nav-link"><span class="icon">👤</span> Donors</a>
-    <a href="recipients.html"   class="nav-link"><span class="icon">🏥</span> Recipients</a>
-    <a href="donations.html"    class="nav-link"><span class="icon">💉</span> Donations</a>
-    <a href="inventory.html"    class="nav-link"><span class="icon">🩸</span> Blood Inventory</a>
-    <div class="nav-section">Requests</div>
-    <a href="requests.html"     class="nav-link"><span class="icon">📋</span> Blood Requests</a>
-    <a href="emergency.html"    class="nav-link"><span class="icon">🚨</span> Emergency</a>
-    <a href="appointments.html" class="nav-link"><span class="icon">📅</span> Appointments</a>
+    <div class=nav-section>Overview</div>
+    <a href=index.html        class=nav-link><span class=icon>🏠</span> Dashboard</a>
+    <div class=nav-section>Management</div>
+    <a href=donors.html       class=nav-link active><span class=icon>👤</span> Donors</a>
+    <a href=recipients.html   class=nav-link><span class=icon>🏥</span> Recipients</a>
+    <a href=donations.html    class=nav-link><span class=icon>💉</span> Donations</a>
+    <a href=inventory.html    class=nav-link><span class=icon>🩸</span> Blood Inventory</a>
+    <div class=nav-section>Requests</div>
+    <a href=requests.html     class=nav-link><span class=icon>📋</span> Blood Requests</a>
+    <a href=emergency.html    class=nav-link><span class=icon>🚨</span> Emergency</a>
+    <a href=appointments.html class=nav-link><span class=icon>📅</span> Appointments</a>
   </nav>
+  <div class=sidebar-footer>Blood Donation DBMS Lab © 2026</div>
 </aside>
 
-<div class="main">
-  <div class="topbar">
-    <h1>👤 Donors</h1>
-    <div class="topbar-right">
-      <button class="btn btn-primary" onclick="openModal('modal-add-donor')">+ Add Donor</button>
+<div class=main>
+  <div class=topbar>
+    <div class=topbar-title>
+      <div class=page-icon>👤</div>
+      <h1>Donors</h1>
+    </div>
+    <div class=topbar-right>
+      <button class=btn btn-primary onclick=openModal('modal-add-donor')>+ Add Donor</button>
     </div>
   </div>
-  <div class="page-content">
-    <div class="card">
-      <div class="card-header">
+  <div class=page-content>
+    <div class=card>
+      <div class=card-header>
         <h2>All Donors</h2>
-        <div class="search-bar" style="margin:0;width:300px;">
-          <input type="text" id="search-input" class="search-input" placeholder="Search by name, phone..." oninput="filterTable()"/>
+        <div class=search-wrap>
+          <span class=search-icon>🔍</span>
+          <input type=text id=search-input class=search-input placeholder=Search by name, phone... oninput=filterTable()/>
         </div>
       </div>
-      <div class="card-body" style="padding:0;">
-        <div class="table-wrap">
-          <table id="donors-table">
+      <div class=card-body style=padding:0;>
+        <div class=table-wrap>
+          <table id=donors-table>
             <thead>
               <tr>
                 <th>#</th><th>Name</th><th>Gender</th><th>DOB</th>
@@ -53,8 +58,8 @@
                 <th>Last Donated</th><th>Availability</th><th>Actions</th>
               </tr>
             </thead>
-            <tbody id="donors-tbody">
-              <tr><td colspan="10" class="loader"><div class="spinner"></div></td></tr>
+            <tbody id=donors-tbody>
+              <tr><td colspan=10 class=loader><div class=spinner></div></td></tr>
             </tbody>
           </table>
         </div>
@@ -64,61 +69,61 @@
 </div>
 
 <!-- Add Donor Modal -->
-<div class="modal-backdrop" id="modal-add-donor">
-  <div class="modal">
-    <div class="modal-header">
+<div class=modal-backdrop id=modal-add-donor>
+  <div class=modal>
+    <div class=modal-header>
       <h3>➕ Add New Donor</h3>
-      <button class="modal-close" onclick="closeModal('modal-add-donor')">✕</button>
+      <button class=modal-close onclick=closeModal('modal-add-donor')>✕</button>
     </div>
-    <div class="modal-body">
-      <form id="form-add-donor" onsubmit="addDonor(event)">
-        <div class="form-grid-2">
-          <div class="form-row">
+    <div class=modal-body>
+      <form id=form-add-donor onsubmit=addDonor(event)>
+        <div class=form-grid-2>
+          <div class=form-row>
             <label>Full Name *</label>
-            <input type="text" class="form-control" name="name" required/>
+            <input type=text class=form-control name=name required/>
           </div>
-          <div class="form-row">
+          <div class=form-row>
             <label>Date of Birth *</label>
-            <input type="date" class="form-control" name="dob" required/>
+            <input type=date class=form-control name=dob required/>
           </div>
-          <div class="form-row">
+          <div class=form-row>
             <label>Gender *</label>
-            <select class="form-control" name="gender" required>
-              <option value="">Select...</option>
-              <option>Male</option><option>Female</option><option>Other</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Phone *</label>
-            <input type="text" class="form-control" name="phone" required/>
-          </div>
-          <div class="form-row">
-            <label>Email</label>
-            <input type="email" class="form-control" name="email"/>
-          </div>
-          <div class="form-row">
-            <label>Availability *</label>
-            <select class="form-control" name="availability" required>
-              <option value="Available">Available</option>
-              <option value="Unavailable">Unavailable</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Address</label>
-          <input type="text" class="form-control" name="address"/>
-        </div>
-        <div class="modal-footer" style="padding:0;border:none;margin-top:16px;">
-          <button type="button" class="btn btn-outline" onclick="closeModal('modal-add-donor')">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Donor</button>
-        </div>
-      </form>
-    </div>
-  </div>
+            <select class=form-control name=gender required>
+              <option value=">Select...</option>
+ <option>Male</option><option>Female</option><option>Other</option>
+ </select>
+ </div>
+ <div class=form-row>
+ <label>Phone *</label>
+ <input type=text class=form-control name=phone required/>
+ </div>
+ <div class=form-row>
+ <label>Email</label>
+ <input type=email class=form-control name=email/>
+ </div>
+ <div class=form-row>
+ <label>Availability *</label>
+ <select class=form-control name=availability required>
+ <option value=Available>Available</option>
+ <option value=Unavailable>Unavailable</option>
+ </select>
+ </div>
+ </div>
+ <div class=form-row>
+ <label>Address</label>
+ <input type=text class=form-control name=address/>
+ </div>
+ <div class=modal-footer style=padding:0;border:none;margin-top:16px;>
+ <button type=button class=btn btn-outline onclick=closeModal('modal-add-donor')>Cancel</button>
+ <button type=submit class=btn btn-primary>Save Donor</button>
+ </div>
+ </form>
+ </div>
+ </div>
 </div>
 
-<div id="toast-container"></div>
-<script src="js/api.js"></script>
-<script src="js/donors.js"></script>
+<div id=toast-container></div>
+<script src=js/api.js></script>
+<script src=js/donors.js></script>
 </body>
 </html>

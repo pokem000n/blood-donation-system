@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Emergency Requests — Blood Donation System</title>
+  <title>Emergency — Blood Donation System</title>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <aside class="sidebar">
-  <div class="sidebar-logo"><div class="logo-icon">🩸</div><h2>Blood Donation<br>Management</h2></div>
+  <div class="sidebar-logo">
+    <div class="logo-icon">🩸</div>
+    <div><h2>BloodBank</h2><span>Management System</span></div>
+  </div>
   <nav>
-    <div class="nav-section">Main</div>
+    <div class="nav-section">Overview</div>
     <a href="index.html"        class="nav-link"><span class="icon">🏠</span> Dashboard</a>
-    <div class="nav-section">Manage</div>
+    <div class="nav-section">Management</div>
     <a href="donors.html"       class="nav-link"><span class="icon">👤</span> Donors</a>
     <a href="recipients.html"   class="nav-link"><span class="icon">🏥</span> Recipients</a>
     <a href="donations.html"    class="nav-link"><span class="icon">💉</span> Donations</a>
@@ -22,39 +25,40 @@
     <a href="emergency.html"    class="nav-link"><span class="icon">🚨</span> Emergency</a>
     <a href="appointments.html" class="nav-link"><span class="icon">📅</span> Appointments</a>
   </nav>
+  <div class="sidebar-footer">Blood Donation DBMS Lab © 2026</div>
 </aside>
 
 <div class="main">
   <div class="topbar">
-    <h1>🚨 Emergency Requests</h1>
+    <div class="topbar-title">
+      <div class="page-icon">🚨</div>
+      <h1>Emergency Requests</h1>
+    </div>
     <div class="topbar-right">
+      <span style="font-size:12px;background:var(--danger-bg);color:var(--red);padding:6px 14px;border-radius:20px;font-weight:600;border:1px solid rgba(230,57,70,0.2);">
+        ⚡ Critical rows highlighted
+      </span>
       <button class="btn btn-primary" onclick="openModal('modal-add-emergency')">+ File Emergency</button>
     </div>
   </div>
+
   <div class="page-content">
     <div class="card">
       <div class="card-header">
         <h2>All Emergency Requests</h2>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span style="font-size:12px;background:#fff0ef;color:#c0392b;padding:4px 10px;border-radius:6px;font-weight:700;">
-            🔴 Critical rows are highlighted
-          </span>
-        </div>
       </div>
-      <div class="card-body" style="padding:0;">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th><th>Recipient</th><th>Age</th><th>Blood Group</th>
-                <th>Hospital</th><th>Date</th><th>Status</th><th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="emergency-tbody">
-              <tr><td colspan="8" class="loader"><div class="spinner"></div></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Recipient</th><th>Age</th><th>Blood Group</th>
+              <th>Hospital</th><th>Date</th><th>Status</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="emergency-tbody">
+            <tr><td colspan="8"><div class="loader"><div class="spinner"></div></div></td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -63,7 +67,7 @@
 <!-- Add Emergency Modal -->
 <div class="modal-backdrop" id="modal-add-emergency">
   <div class="modal">
-    <div class="modal-header" style="background:#e74c3c;">
+    <div class="modal-header" style="background:linear-gradient(135deg,rgba(230,57,70,0.25),rgba(193,18,31,0.1));">
       <h3>🚨 File Emergency Request</h3>
       <button class="modal-close" onclick="closeModal('modal-add-emergency')">✕</button>
     </div>
@@ -96,16 +100,16 @@
             <label>Status *</label>
             <select class="form-control" name="status" required>
               <option value="Pending">Pending</option>
-              <option value="Critical">Critical</option>
+              <option value="Critical">⚡ Critical</option>
               <option value="Fulfilled">Fulfilled</option>
             </select>
           </div>
         </div>
-        <div class="modal-footer" style="padding:0;border:none;margin-top:16px;">
-          <button type="button" class="btn btn-outline" onclick="closeModal('modal-add-emergency')">Cancel</button>
-          <button type="submit" class="btn btn-danger">File Emergency</button>
-        </div>
       </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-emergency')">Cancel</button>
+      <button class="btn btn-primary" onclick="document.getElementById('form-add-emergency').requestSubmit()">File Emergency</button>
     </div>
   </div>
 </div>
