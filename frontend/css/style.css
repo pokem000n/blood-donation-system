@@ -72,6 +72,16 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--red); }
 
+/* ── SVG Icon base ───────────────────────────────────────── */
+svg { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+.nav-icon svg { width: 16px; height: 16px; stroke-width: 1.8; }
+.stat-icon svg { width: 18px; height: 18px; stroke-width: 1.8; }
+.page-icon svg { width: 16px; height: 16px; stroke-width: 2; }
+.badge svg { width: 10px; height: 10px; }
+.toast svg { width: 15px; height: 15px; flex-shrink: 0; }
+.btn svg { width: 14px; height: 14px; }
+.theme-toggle svg { width: 16px; height: 16px; stroke-width: 2; }
+
 /* ── Sidebar ─────────────────────────────────────────────── */
 .sidebar {
   width: var(--sidebar-w);
