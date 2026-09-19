@@ -33,16 +33,16 @@ function injectSidebar() {
   if (!root) return;
   root.innerHTML = `
   <aside class="sidebar">
-    <a href="index.html" class="sidebar-logo" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+    <a href="index.html" class="sidebar-logo" style="display:flex;align-items:center;gap:11px;text-decoration:none;">
       <div class="logo-mark">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="44" height="44" rx="12" fill="url(#lg)"/>
-          <path d="M22 8C22 8 12 19 12 25a10 10 0 0020 0C32 19 22 8 22 8z" fill="white" opacity="0.95"/>
-          <path d="M18 26q0 4 4 4" stroke="rgba(230,57,70,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="11" fill="url(#lg2)"/>
+          <path d="M20 7C20 7 11 17 11 23a9 9 0 0018 0C29 17 20 7 20 7z" fill="white" opacity="0.96"/>
+          <path d="M16.5 24q0 3.5 3.5 3.5" stroke="rgba(220,40,55,0.65)" stroke-width="1.4" stroke-linecap="round"/>
           <defs>
-            <linearGradient id="lg" x1="0" y1="0" x2="44" y2="44">
+            <linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40">
               <stop offset="0%" stop-color="#e63946"/>
-              <stop offset="100%" stop-color="#c1121f"/>
+              <stop offset="100%" stop-color="#ad1220"/>
             </linearGradient>
           </defs>
         </svg>
@@ -65,7 +65,10 @@ function injectSidebar() {
       <a href="emergency.html"    class="nav-link"><span class="nav-icon">🚨</span> Emergency</a>
       <a href="appointments.html" class="nav-link"><span class="nav-icon">📅</span> Appointments</a>
     </nav>
-    <div class="sidebar-footer">HemoTrack v2.0 · DBMS Lab 2026</div>
+    <div class="sidebar-footer">
+      <span>HemoTrack v3.0</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:10px;"><span class="dot"></span> Online</span>
+    </div>
   </aside>`;
 }
 
