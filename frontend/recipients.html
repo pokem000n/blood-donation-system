@@ -28,7 +28,7 @@
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>#</th><th>Recipient</th><th>Gender</th><th>Age</th><th>Phone</th><th>Address</th></tr></thead>
+          <thead><tr><th>#</th><th>Recipient</th><th>Gender</th><th>Age</th><th>Phone</th><th>Blood Group</th><th>Address</th></tr></thead>
           <tbody id="recipients-tbody"><tr><td colspan="6"><div class="loader"><div class="spinner"></div></div></td></tr></tbody>
         </table>
       </div>
@@ -64,7 +64,13 @@
             <label>Phone *</label>
             <input type="text" class="form-control" name="phone" placeholder="01XXXXXXXXX" required/>
           </div>
-          <div class="form-row" style="grid-column:span 2;">
+          <div class="form-row">
+            <label>Blood Group *</label>
+            <select class="form-control" name="blood_group_id" id="rec-bg-select" required>
+              <option value="">Select blood group</option>
+            </select>
+          </div>
+          <div class="form-row">
             <label>Address</label>
             <input type="text" class="form-control" name="address" placeholder="City, Area"/>
           </div>
