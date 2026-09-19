@@ -1,5 +1,13 @@
 let allDonors = [];
 
+const avatarColors = [
+  ['rgba(230,57,70,0.15)','#ff8088'],
+  ['rgba(78,156,244,0.15)','#4e9cf4'],
+  ['rgba(46,201,122,0.15)','#2ec97a'],
+  ['rgba(155,114,245,0.15)','#9b72f5'],
+  ['rgba(244,169,78,0.15)','#f4a94e'],
+];
+
 async function loadDonors() {
   try {
     allDonors = await apiFetch('/donors');
@@ -9,13 +17,15 @@ async function loadDonors() {
   }
 }
 
-const colors = [
-  ['rgba(230,57,70,0.15)','#ff8088'],
-  ['rgba(78,156,244,0.15)','#4e9cf4'],
-  ['rgba(46,201,122,0.15)','#2ec97a'],
-  ['rgba(155,114,245,0.15)','#9b72f5'],
-  ['rgba(244,169,78,0.15)','#f4a94e'],
-];
+async function loadBloodGroups() {
+  try {
+    const bgs = await apiFetch('/blood-groups');
+    const sel = document.getElementById('donor-bg-select');
+    if (!sel) return;
+    sel.innerHTML = '<option value="">Select blood group</option>' +
+      bgs.map(b => `<option value="${b.blood_group_id}">${b.blood_group}</option>`).join('');
+  } catch (e) { /* silent */ }
+}
 
 function renderTable(donors) {
   const tbody = document.getElementById('donors-tbody');
@@ -24,24 +34,21 @@ function renderTable(donors) {
     return;
   }
   tbody.innerHTML = donors.map((d, i) => {
-    const [bg, tc] = colors[i % colors.length];
+    const [bg, tc] = avatarColors[i % avatarColors.length];
     return `
     <tr>
-      <td>${i + 1}</td>
+      <td style="color:var(--text3);font-size:12px;">${i + 1}</td>
       <td>
         <div style="display:flex;align-items:center;gap:10px;">
           ${avatar(d.name, bg, tc)}
-          <div>
-            <strong>${d.name}</strong><br>
-            <small>${d.email || 'No email'}</small>
-          </div>
+          <div><strong>${d.name}</strong><br><small>${d.email || '—'}</small></div>
         </div>
       </td>
       <td>${d.gender}</td>
       <td>${fmtDate(d.dob)}</td>
-      <td><code style="background:var(--bg3);padding:2px 8px;border-radius:5px;font-size:12px;">${d.phone}</code></td>
-      <td>${d.blood_group ? `<span class="badge badge-blood">${d.blood_group}</span>` : '<span style="color:var(--text3)">—</span>'}</td>
-      <td style="text-align:center;"><strong style="color:var(--text)">${d.total_donations}</strong></td>
+      <td><code style="background:var(--bg3);padding:2px 8px;border-radius:5px;font-size:12px;color:var(--text2);">${d.phone}</code></td>
+      <td>${d.blood_group ? `<span class="badge badge-blood">${d.blood_group}</span>` : '<span style="color:var(--text3);font-size:12px;">—</span>'}</td>
+      <td style="text-align:center;"><strong>${d.total_donations}</strong></td>
       <td>${fmtDate(d.last_donation_date)}</td>
       <td>${statusBadge(d.availability)}</td>
       <td>
@@ -56,23 +63,26 @@ function renderTable(donors) {
 
 function filterTable() {
   const q = document.getElementById('search-input').value.toLowerCase();
-  const filtered = allDonors.filter(d =>
+  renderTable(allDonors.filter(d =>
     d.name.toLowerCase().includes(q) ||
-    (d.phone || '').toLowerCase().includes(q) ||
-    (d.email || '').toLowerCase().includes(q) ||
-    (d.blood_group || '').toLowerCase().includes(q)
-  );
-  renderTable(filtered);
+    (d.phone||'').toLowerCase().includes(q) ||
+    (d.email||'').toLowerCase().includes(q) ||
+    (d.blood_group||'').toLowerCase().includes(q)
+  ));
 }
 
 async function addDonor(e) {
   e.preventDefault();
   const form = e.target;
   const body = {
-    name: form.name.value, dob: form.dob.value,
-    gender: form.gender.value, phone: form.phone.value,
-    email: form.email.value, address: form.address.value,
-    availability: form.availability.value
+    name:           form.name.value,
+    dob:            form.dob.value,
+    gender:         form.gender.value,
+    phone:          form.phone.value,
+    email:          form.email.value,
+    address:        form.address.value,
+    availability:   form.availability.value,
+    blood_group_id: form.blood_group_id.value || null
   };
   try {
     await apiFetch('/donors', { method: 'POST', body: JSON.stringify(body) });
@@ -96,3 +106,4 @@ async function toggleAvailability(id, current) {
 }
 
 loadDonors();
+loadBloodGroups();

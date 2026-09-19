@@ -1,107 +1,68 @@
-﻿<!DOCTYPE html>
-<html lang=en>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset=UTF-8/>
-  <meta name=viewport content=width=device-width, initial-scale=1.0/>
-  <title>Donations — Blood Donation System</title>
-  <link rel=stylesheet href=css/style.css/>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Donations — HemoTrack</title>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<aside class=sidebar>
-  <div class=sidebar-logo>
-    <div class=logo-icon>🩸</div>
-    <div><h2>BloodBank</h2><span>Management System</span></div>
-  </div>
-  <nav>
-    <div class=nav-section>Overview</div>
-    <a href=index.html        class=nav-link><span class=icon>🏠</span> Dashboard</a>
-    <div class=nav-section>Management</div>
-    <a href=donors.html       class=nav-link><span class=icon>👤</span> Donors</a>
-    <a href=recipients.html   class=nav-link><span class=icon>🏥</span> Recipients</a>
-    <a href=donations.html    class=nav-link active><span class=icon>💉</span> Donations</a>
-    <a href=inventory.html    class=nav-link><span class=icon>🩸</span> Blood Inventory</a>
-    <div class=nav-section>Requests</div>
-    <a href=requests.html     class=nav-link><span class=icon>📋</span> Blood Requests</a>
-    <a href=emergency.html    class=nav-link><span class=icon>🚨</span> Emergency</a>
-    <a href=appointments.html class=nav-link><span class=icon>📅</span> Appointments</a>
-  </nav>
-  <div class=sidebar-footer>Blood Donation DBMS Lab © 2026</div>
-</aside>
-
-<div class=main>
-  <div class=topbar>
-    <div class=topbar-title>
-      <div class=page-icon>💉</div>
-      <h1>Donations</h1>
-    </div>
-    <div class=topbar-right>
-      <button class=btn btn-primary onclick=openModal('modal-add-donation')>+ Record Donation</button>
+<div id="sidebar-root"></div>
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title"><div class="page-icon">💉</div><h1>Donations</h1></div>
+    <div class="topbar-right">
+      <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">☀️</button>
+      <button class="btn btn-primary" onclick="openModal('modal-record-donation')">+ Record Donation</button>
     </div>
   </div>
-  <div class=page-content>
-    <div class=card>
-      <div class=card-header><h2>Donation History</h2></div>
-      <div class=card-body style=padding:0;>
-        <div class=table-wrap>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th><th>Donor</th><th>Blood Group</th>
-                <th>Date</th><th>Quantity (ml)</th><th>Certificate</th>
-              </tr>
-            </thead>
-            <tbody id=donations-tbody>
-              <tr><td colspan=6 class=loader><div class=spinner></div></td></tr>
-            </tbody>
-          </table>
-        </div>
+  <div class="page-content">
+    <div class="card">
+      <div class="card-header"><h2>Donation History</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Donor</th><th>Blood Group</th><th>Date</th><th>Quantity (ml)</th><th>Certificate</th></tr></thead>
+          <tbody id="donations-tbody"><tr><td colspan="6"><div class="loader"><div class="spinner"></div></div></td></tr></tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Add Donation Modal -->
-<div class=modal-backdrop id=modal-add-donation>
-  <div class=modal>
-    <div class=modal-header>
-      <h3>💉 Record New Donation</h3>
-      <button class=modal-close onclick=closeModal('modal-add-donation')>✕</button>
+<div class="modal-backdrop" id="modal-record-donation">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>💉 Record Donation</h3>
+      <button class="modal-close" onclick="closeModal('modal-record-donation')">✕</button>
     </div>
-    <div class=modal-body>
-      <form id=form-add-donation onsubmit=addDonation(event)>
-        <div class=form-grid-2>
-          <div class=form-row>
+    <div class="modal-body">
+      <form id="form-record-donation" onsubmit="recordDonation(event)">
+        <div class="form-grid-2">
+          <div class="form-row">
             <label>Donor *</label>
-            <select class=form-control name=donor_id id=donor-select required>
-              <option value=">Loading...</option>
- </select>
- </div>
- <div class=form-row>
- <label>Blood Group *</label>
- <select class=form-control name=blood_group_id id=bg-select required>
- <option value=>Loading...</option>
- </select>
- </div>
- <div class=form-row>
- <label>Donation Date *</label>
- <input type=date class=form-control name=donation_date required/>
- </div>
- <div class=form-row>
- <label>Quantity (ml) *</label>
- <input type=number class=form-control name=quantity value=450 min=100 max=600 required/>
- </div>
- </div>
- <div class=modal-footer style=padding:0;border:none;margin-top:16px;>
- <button type=button class=btn btn-outline onclick=closeModal('modal-add-donation')>Cancel</button>
- <button type=submit class=btn btn-primary>Record</button>
- </div>
- </form>
- </div>
- </div>
+            <select class="form-control" name="donor_id" id="don-select" required><option value="">Loading...</option></select>
+          </div>
+          <div class="form-row">
+            <label>Blood Group *</label>
+            <select class="form-control" name="blood_group_id" id="don-bg-select" required><option value="">Loading...</option></select>
+          </div>
+          <div class="form-row">
+            <label>Donation Date *</label>
+            <input type="date" class="form-control" name="donation_date" required/>
+          </div>
+          <div class="form-row">
+            <label>Quantity (ml) *</label>
+            <input type="number" class="form-control" name="quantity" value="450" min="100" max="600" required/>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-record-donation')">Cancel</button>
+      <button class="btn btn-primary" onclick="document.getElementById('form-record-donation').requestSubmit()">Record</button>
+    </div>
+  </div>
 </div>
 
-<div id=toast-container></div>
-<script src=js/api.js></script>
-<script src=js/donations.js></script>
-</body>
-</html>
+<div id="toast-container"></div>
+<script src="js/api.js"></script><script src="js/donations.js"></script>
+</body></html>

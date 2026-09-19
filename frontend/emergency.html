@@ -1,101 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Emergency — Blood Donation System</title>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Emergency — HemoTrack</title>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-icon">🩸</div>
-    <div><h2>BloodBank</h2><span>Management System</span></div>
-  </div>
-  <nav>
-    <div class="nav-section">Overview</div>
-    <a href="index.html"        class="nav-link"><span class="icon">🏠</span> Dashboard</a>
-    <div class="nav-section">Management</div>
-    <a href="donors.html"       class="nav-link"><span class="icon">👤</span> Donors</a>
-    <a href="recipients.html"   class="nav-link"><span class="icon">🏥</span> Recipients</a>
-    <a href="donations.html"    class="nav-link"><span class="icon">💉</span> Donations</a>
-    <a href="inventory.html"    class="nav-link"><span class="icon">🩸</span> Blood Inventory</a>
-    <div class="nav-section">Requests</div>
-    <a href="requests.html"     class="nav-link"><span class="icon">📋</span> Blood Requests</a>
-    <a href="emergency.html"    class="nav-link"><span class="icon">🚨</span> Emergency</a>
-    <a href="appointments.html" class="nav-link"><span class="icon">📅</span> Appointments</a>
-  </nav>
-  <div class="sidebar-footer">Blood Donation DBMS Lab © 2026</div>
-</aside>
-
+<div id="sidebar-root"></div>
 <div class="main">
   <div class="topbar">
-    <div class="topbar-title">
-      <div class="page-icon">🚨</div>
-      <h1>Emergency Requests</h1>
-    </div>
+    <div class="topbar-title"><div class="page-icon">🚨</div><h1>Emergency Requests</h1></div>
     <div class="topbar-right">
-      <span style="font-size:12px;background:var(--danger-bg);color:var(--red);padding:6px 14px;border-radius:20px;font-weight:600;border:1px solid rgba(230,57,70,0.2);">
-        ⚡ Critical rows highlighted
-      </span>
+      <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">☀️</button>
+      <span class="badge badge-danger" style="padding:7px 13px;font-size:11px;">⚡ Critical rows highlighted</span>
       <button class="btn btn-primary" onclick="openModal('modal-add-emergency')">+ File Emergency</button>
     </div>
   </div>
-
   <div class="page-content">
     <div class="card">
-      <div class="card-header">
-        <h2>All Emergency Requests</h2>
-      </div>
+      <div class="card-header"><h2>All Emergency Requests</h2></div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>#</th><th>Recipient</th><th>Age</th><th>Blood Group</th>
-              <th>Hospital</th><th>Date</th><th>Status</th><th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="emergency-tbody">
-            <tr><td colspan="8"><div class="loader"><div class="spinner"></div></div></td></tr>
-          </tbody>
+          <thead><tr><th>#</th><th>Recipient</th><th>Age</th><th>Blood Group</th><th>Hospital</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="emergency-tbody"><tr><td colspan="8"><div class="loader"><div class="spinner"></div></div></td></tr></tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Add Emergency Modal -->
 <div class="modal-backdrop" id="modal-add-emergency">
   <div class="modal">
-    <div class="modal-header" style="background:linear-gradient(135deg,rgba(230,57,70,0.25),rgba(193,18,31,0.1));">
+    <div class="modal-header" style="background:linear-gradient(135deg,rgba(230,57,70,0.2),transparent);">
       <h3>🚨 File Emergency Request</h3>
       <button class="modal-close" onclick="closeModal('modal-add-emergency')">✕</button>
     </div>
     <div class="modal-body">
       <form id="form-add-emergency" onsubmit="addEmergency(event)">
         <div class="form-grid-2">
-          <div class="form-row">
-            <label>Recipient *</label>
-            <select class="form-control" name="recipient_id" id="e-rec-select" required>
-              <option value="">Loading...</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Blood Group *</label>
-            <select class="form-control" name="blood_group_id" id="e-bg-select" required>
-              <option value="">Loading...</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Hospital *</label>
-            <select class="form-control" name="hospital_id" id="e-hosp-select" required>
-              <option value="">Loading...</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Request Date *</label>
-            <input type="date" class="form-control" name="request_date" required/>
-          </div>
+          <div class="form-row"><label>Recipient *</label><select class="form-control" name="recipient_id" id="e-rec-select" required><option value="">Loading...</option></select></div>
+          <div class="form-row"><label>Blood Group *</label><select class="form-control" name="blood_group_id" id="e-bg-select" required><option value="">Loading...</option></select></div>
+          <div class="form-row"><label>Hospital *</label><select class="form-control" name="hospital_id" id="e-hosp-select" required><option value="">Loading...</option></select></div>
+          <div class="form-row"><label>Request Date *</label><input type="date" class="form-control" name="request_date" required/></div>
           <div class="form-row" style="grid-column:span 2;">
             <label>Status *</label>
             <select class="form-control" name="status" required>
@@ -115,7 +61,5 @@
 </div>
 
 <div id="toast-container"></div>
-<script src="js/api.js"></script>
-<script src="js/emergency.js"></script>
-</body>
-</html>
+<script src="js/api.js"></script><script src="js/emergency.js"></script>
+</body></html>

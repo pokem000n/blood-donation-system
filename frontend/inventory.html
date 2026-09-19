@@ -1,72 +1,44 @@
-﻿<!DOCTYPE html>
-<html lang=en>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset=UTF-8/>
-  <meta name=viewport content=width=device-width, initial-scale=1.0/>
-  <title>Blood Inventory — Blood Donation System</title>
-  <link rel=stylesheet href=css/style.css/>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Blood Inventory — HemoTrack</title>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<aside class=sidebar>
-  <div class=sidebar-logo>
-    <div class=logo-icon>🩸</div>
-    <div><h2>BloodBank</h2><span>Management System</span></div>
-  </div>
-  <nav>
-    <div class=nav-section>Overview</div>
-    <a href=index.html        class=nav-link><span class=icon>🏠</span> Dashboard</a>
-    <div class=nav-section>Management</div>
-    <a href=donors.html       class=nav-link><span class=icon>👤</span> Donors</a>
-    <a href=recipients.html   class=nav-link><span class=icon>🏥</span> Recipients</a>
-    <a href=donations.html    class=nav-link><span class=icon>💉</span> Donations</a>
-    <a href=inventory.html    class=nav-link active><span class=icon>🩸</span> Blood Inventory</a>
-    <div class=nav-section>Requests</div>
-    <a href=requests.html     class=nav-link><span class=icon>📋</span> Blood Requests</a>
-    <a href=emergency.html    class=nav-link><span class=icon>🚨</span> Emergency</a>
-    <a href=appointments.html class=nav-link><span class=icon>📅</span> Appointments</a>
-  </nav>
-  <div class=sidebar-footer>Blood Donation DBMS Lab © 2026</div>
-</aside>
-
-<div class=main>
-  <div class=topbar>
-    <div class=topbar-title>
-      <div class=page-icon>🩸</div>
-      <h1>Blood Inventory</h1>
-    </div>
-    <div class=topbar-right>
-      <span style=font-size:12px;color:#7f8c8d;>
-        🟢 &gt;2000ml OK &nbsp; 🟡 1000–2000ml Low &nbsp; 🔴 &lt;1000ml Critical
-      </span>
+<div id="sidebar-root"></div>
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title"><div class="page-icon">🩸</div><h1>Blood Inventory</h1></div>
+    <div class="topbar-right">
+      <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">☀️</button>
+      <div style="display:flex;gap:8px;font-size:12px;">
+        <span class="badge badge-success">● OK ≥2000ml</span>
+        <span class="badge badge-warning">● Low 1000–1999ml</span>
+        <span class="badge badge-danger">⚡ Critical &lt;1000ml</span>
+      </div>
     </div>
   </div>
-  <div class=page-content>
-    <!-- Cards grid -->
-    <div class=inventory-grid id=inventory-grid>
-      <div class=loader><div class=spinner></div></div>
-    </div>
-
-    <!-- Table view -->
-    <div class=card style=margin-top:24px;>
-      <div class=card-header><h2>Detailed Inventory Table</h2></div>
-      <div class=card-body style=padding:0;>
-        <div class=table-wrap>
-          <table>
-            <thead>
-              <tr><th>#</th><th>Blood Group</th><th>Hospital</th><th>Location</th><th>Quantity (ml)</th><th>Last Updated</th><th>Status</th></tr>
-            </thead>
-            <tbody id=inventory-tbody>
-              <tr><td colspan=7 class=loader><div class=spinner></div></td></tr>
-            </tbody>
-          </table>
+  <div class="page-content">
+    <div class="card">
+      <div class="card-header"><h2>🩸 Stock Overview</h2></div>
+      <div class="card-body">
+        <div class="inventory-grid" id="inventory-grid">
+          <div class="loader"><div class="spinner"></div></div>
         </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2>Detailed Inventory</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Blood Group</th><th>Blood Bank / Hospital</th><th>Quantity (ml)</th><th>Status</th><th>Last Updated</th></tr></thead>
+          <tbody id="inventory-tbody"><tr><td colspan="6"><div class="loader"><div class="spinner"></div></div></td></tr></tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
-
-<div id=toast-container></div>
-<script src=js/api.js></script>
-<script src=js/inventory.js></script>
-</body>
-</html>
+<div id="toast-container"></div>
+<script src="js/api.js"></script><script src="js/inventory.js"></script>
+</body></html>
