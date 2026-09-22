@@ -1,8 +1,3 @@
--- ============================================================
---  Blood Donation Management System — Railway DB Init Script
---  Run this once in Railway MySQL console after deployment
--- ============================================================
-
 CREATE DATABASE IF NOT EXISTS blood_donation_db;
 USE blood_donation_db;
 
