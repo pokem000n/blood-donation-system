@@ -1,7 +1,3 @@
-// Vercel Serverless Entry Point
-// Wraps the entire Express app as a single serverless function
-
-require('dotenv').config();
 const express = require('express');
 const cors    = require('cors');
 
@@ -10,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ── API Routes ────────────────────────────────────────────────
+// API Routes 
 app.use('/api/dashboard',    require('../backend/routes/dashboard'));
 app.use('/api/donors',       require('../backend/routes/donors'));
 app.use('/api/recipients',   require('../backend/routes/recipients'));
