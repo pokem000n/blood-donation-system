@@ -33,12 +33,9 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Missing required fields.' });
   }
 
-  const conn = await db.getConnection();
   try {
-    await conn.beginTransaction();
-
     // 1. Insert Donor
-    const [result] = await conn.query(
+    const [result] = await db.query(
       `INSERT INTO Donor (name, dob, gender, phone, email, address, availability, blood_group_id)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [name, dob, gender, phone, email || null, address || null, availability, blood_group_id || null]
@@ -51,39 +48,35 @@ router.post('/', async (req, res) => {
       const today = new Date().toISOString().split('T')[0];
 
       // Insert Donation
-      await conn.query(
+      await db.query(
         `INSERT INTO Donation (donor_id, blood_group_id, donation_date, quantity) VALUES (?, ?, ?, ?)`,
         [donor_id, blood_group_id, today, quantity_ml]
       );
 
       // Check Inventory
-      const [inv] = await conn.query(
+      const [inv] = await db.query(
         `SELECT inventory_id FROM Blood_Inventory WHERE blood_group_id = ? AND blood_bank_id = ?`,
         [blood_group_id, hospital_id]
       );
 
       if (inv.length > 0) {
         // Update existing stock
-        await conn.query(
+        await db.query(
           `UPDATE Blood_Inventory SET quantity = quantity + ?, last_updated = NOW() WHERE inventory_id = ?`,
           [quantity_ml, inv[0].inventory_id]
         );
       } else {
         // Insert new stock record
-        await conn.query(
+        await db.query(
           `INSERT INTO Blood_Inventory (blood_group_id, blood_bank_id, quantity, last_updated) VALUES (?, ?, ?, NOW())`,
           [blood_group_id, hospital_id, quantity_ml]
         );
       }
     }
 
-    await conn.commit();
     res.status(201).json({ message: 'Donor added successfully.', donor_id });
   } catch (err) {
-    await conn.rollback();
     res.status(500).json({ error: err.message });
-  } finally {
-    conn.release();
   }
 });
 
