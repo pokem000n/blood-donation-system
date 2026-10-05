@@ -10,7 +10,6 @@ app.use(cors());
 app.use(express.json());
 
 // ── Serve frontend static files ───────────────────────────────
-// Works for both local dev and Railway (project root has frontend/)
 const frontendPath = path.join(__dirname, '..', 'frontend');
 app.use(express.static(frontendPath));
 
@@ -22,10 +21,8 @@ app.use('/api/donations',    require('./routes/donations'));
 app.use('/api/inventory',    require('./routes/inventory'));
 app.use('/api/requests',     require('./routes/requests'));
 app.use('/api/emergency',    require('./routes/emergency'));
-app.use('/api/appointments', require('./routes/appointments'));
 app.use('/api/blood-groups', require('./routes/bloodGroups'));
 app.use('/api/hospitals',    require('./routes/hospitals'));
-app.use('/api/centers',      require('./routes/centers'));
 
 // ── Fallback: serve index.html for any non-API route ─────────
 app.get('*', (req, res) => {
@@ -35,5 +32,5 @@ app.get('*', (req, res) => {
 // ── Start Server ──────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🩸  Blood Donation System running on port ${PORT}`);
+  console.log(`🩸  HemoTrack running on port ${PORT}`);
 });

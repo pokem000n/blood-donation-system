@@ -8,11 +8,11 @@ router.get('/stats', async (req, res) => {
     const [[donorRow]]       = await db.query(`SELECT COUNT(*) AS total FROM Donor`);
     const [[recipRow]]       = await db.query(`SELECT COUNT(*) AS total FROM Recipient`);
     const [[availRow]]       = await db.query(`SELECT COUNT(*) AS total FROM Donor WHERE availability = 'Available'`);
-    const [[pendingRow]]     = await db.query(`SELECT COUNT(*) AS total FROM Blood_Request br JOIN Request_Status rs ON br.status_id = rs.status_id WHERE rs.status_name = 'Pending'`);
+    const [[pendingRow]]     = await db.query(`SELECT COUNT(*) AS total FROM Blood_Request WHERE status = 'Pending'`);
     const [[criticalRow]]    = await db.query(`SELECT COUNT(*) AS total FROM Emergency_Request WHERE status = 'Critical'`);
     const [[inventoryRow]]   = await db.query(`SELECT IFNULL(SUM(quantity),0) AS total FROM Blood_Inventory`);
     const [[donationRow]]    = await db.query(`SELECT COUNT(*) AS total FROM Donation`);
-    const [[appointmentRow]] = await db.query(`SELECT COUNT(*) AS total FROM Appointment WHERE status = 'Scheduled'`);
+    const appointmentRow     = { total: 0 }; // Appointment table dropped
 
     // Recent emergency requests
     const [recentEmergency] = await db.query(`

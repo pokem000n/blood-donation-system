@@ -27,7 +27,6 @@ async function loadDashboard() {
     animateCount(document.getElementById('s-pending'),      s.pendingRequests);
     animateCount(document.getElementById('s-critical'),     s.criticalEmergency);
     animateCount(document.getElementById('s-inventory'),    s.totalInventoryMl, 1200);
-    animateCount(document.getElementById('s-appointments'), s.scheduledAppointments);
 
     /* ── Bar chart ── */
     const inv     = data.inventorySummary;

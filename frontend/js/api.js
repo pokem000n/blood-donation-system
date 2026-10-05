@@ -86,7 +86,6 @@ function injectSidebar() {
     { href: 'inventory.html',    iconKey: 'flask-conical',    label: 'Blood Inventory',section: null },
     { href: 'requests.html',     iconKey: 'clipboard-list',   label: 'Blood Requests', section: 'Requests' },
     { href: 'emergency.html',    iconKey: 'alert-triangle',   label: 'Emergency',      section: null },
-    { href: 'appointments.html', iconKey: 'calendar-days',    label: 'Appointments',   section: null },
   ];
 
   const navHTML = navItems.map(item => `
