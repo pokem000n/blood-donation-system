@@ -17,13 +17,24 @@ async function loadDonors() {
   }
 }
 
-async function loadBloodGroups() {
+async function loadDropdowns() {
   try {
-    const bgs = await apiFetch('/blood-groups');
-    const sel = document.getElementById('donor-bg-select');
-    if (!sel) return;
-    sel.innerHTML = '<option value="">Select blood group</option>' +
-      bgs.map(b => `<option value="${b.blood_group_id}">${b.blood_group}</option>`).join('');
+    const [bgs, hospitals] = await Promise.all([
+      apiFetch('/blood-groups'),
+      apiFetch('/hospitals')
+    ]);
+    
+    const bgSel = document.getElementById('donor-bg-select');
+    if (bgSel) {
+      bgSel.innerHTML = '<option value="">Select blood group</option>' +
+        bgs.map(b => `<option value="${b.blood_group_id}">${b.blood_group}</option>`).join('');
+    }
+
+    const hospSel = document.getElementById('donor-hosp-select');
+    if (hospSel) {
+      hospSel.innerHTML = '<option value="">Select hospital</option>' +
+        hospitals.map(h => `<option value="${h.hospital_id}">${h.name}</option>`).join('');
+    }
   } catch (e) { /* silent */ }
 }
 
@@ -82,8 +93,15 @@ async function addDonor(e) {
     email:          form.email.value,
     address:        form.address.value,
     availability:   form.availability.value,
-    blood_group_id: form.blood_group_id.value || null
+    blood_group_id: form.blood_group_id.value || null,
+    donated_bags:   parseInt(form.donated_bags.value) || 0,
+    hospital_id:    form.hospital_id.value || null
   };
+  
+  if (body.donated_bags > 0 && (!body.hospital_id || !body.blood_group_id)) {
+    return showToast('Select Blood Group and Hospital to record donation.', 'error');
+  }
+
   try {
     await apiFetch('/donors', { method: 'POST', body: JSON.stringify(body) });
     showToast('Donor added successfully!', 'success');
@@ -106,4 +124,4 @@ async function toggleAvailability(id, current) {
 }
 
 loadDonors();
-loadBloodGroups();
+loadDropdowns();
